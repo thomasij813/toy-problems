@@ -1,0 +1,14 @@
+{
+  "name": "toy-problems",
+  "version": "1.0.0",
+  "description": "Coding interview prep in Javascript",
+  "main": "",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Thomas Johnson",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
