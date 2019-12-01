@@ -21,7 +21,7 @@
 
 // Unoptimized solution
 
-const longestSubstring = string => {
+let longestSubstring = string => {
   let currentHash = {};
   let longestCount = 0;
   let currentCount = 0;
@@ -52,15 +52,78 @@ const longestSubstring = string => {
   return longestCount;
 };
 
-// Optimization plan:
-// Keep track of substring in a stack.
-// Everytime a letter is encountered, add it to the end of the stack.
-// The stack should also have an object keeping track of letters in it (object)
-// When a repeat is found, start popping off letters from the top of the stack
-// until the repeat letter is found (remove it also, but stop). As letters are
-// popped off the stack, remove them from the tracking object
-// As elements are added and removed from the stack, keep track of its length.
-// Everytime an element is added/removed, check to see if it exceeds the max
-// length encountered and update as needed.
+// Optimized
 
-module.exports = longestSubstring;
+class Queue {
+  constructor() {
+    this.queue = {};
+    this.queueHead = null;
+    this.counter = 0;
+    this.values = {};
+  }
+
+  enqueue(value) {
+    this.counter += 1;
+    this.queue[this.counter] = value;
+    if (!this.queueHead) {
+      this.queueHead = this.counter;
+    }
+
+    if (this.values[value]) {
+      this.recuriveDequeue(value);
+    }
+
+    this.values[value] = true;
+  }
+
+  recuriveDequeue(value) {
+    const dequeuedValue = this.dequeue();
+    if (dequeuedValue !== value) {
+      this.recuriveDequeue(value);
+    }
+  }
+
+  dequeue() {
+    if (!this.queueHead) {
+      return null;
+    }
+
+    const value = this.queue[this.queueHead];
+    delete this.queue[this.queueHead];
+
+    this.values[value] = false;
+
+    const nextQueueHead = this.queueHead + 1;
+    this.queueHead = nextQueueHead > this.counter ? null : nextQueueHead;
+
+    return value;
+  }
+
+  getQueue() {
+    return this.queue;
+  }
+
+  getQueueLength() {
+    if (!this.queueHead) {
+      return 0;
+    }
+
+    return this.counter - this.queueHead + 1;
+  }
+}
+
+longestSubstring = string => {
+  let q = new Queue();
+  let longestCount = 0;
+  for (let i = 0; i < string.length; i++) {
+    const character = string[i];
+    q.enqueue(character);
+    const queueLength = q.getQueueLength();
+    if (queueLength > longestCount) {
+      longestCount = queueLength;
+    }
+  }
+  return longestCount;
+};
+
+module.exports = { longestSubstring, Queue };
