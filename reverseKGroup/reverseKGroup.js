@@ -35,6 +35,7 @@ const reverseKGroup = (head, k) => {
   let holding = [];
   let newHead = null;
   let tail = null;
+  let currentNode = head;
 
   const reverseNodes = function() {
     for (let i = holding.length - 1; i >= 0; i--) {
@@ -50,19 +51,29 @@ const reverseKGroup = (head, k) => {
     }
   };
 
-  const traverse = function(node) {
-    holding.push(node);
-    const nextNode = node.next;
+  while (currentNode) {
+    const nextNode = currentNode.next;
+    holding.push(currentNode);
     if (holding.length === k) {
       reverseNodes();
       holding = [];
     }
-    if (nextNode) {
-      traverse(nextNode);
-    }
-  };
+    currentNode = nextNode;
+  }
 
-  traverse(head);
+  // const traverse = function(node) {
+  //   holding.push(node);
+  //   const nextNode = node.next;
+  //   if (holding.length === k) {
+  //     reverseNodes();
+  //     holding = [];
+  //   }
+  //   if (nextNode) {
+  //     traverse(nextNode);
+  //   }
+  // };
+
+  // traverse(head);
 
   holding.forEach(node => {
     if (!newHead) {
