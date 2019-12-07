@@ -1,16 +1,15 @@
 const removeDuplicates = numbers => {
-  let tracker = {};
   let count = 0;
+  let numTracker = null;
   for (let i = numbers.length - 1; i >= 0; i--) {
     let number = numbers[i];
-    if (tracker[number]) {
+    if (numTracker === number) {
       numbers.splice(i, 1);
     } else {
-      tracker[number] = true;
+      numTracker = number;
       count += 1;
     }
   }
-  console.log(numbers);
   return count;
 };
 
