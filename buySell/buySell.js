@@ -23,6 +23,12 @@
 // Output: 0
 // Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
+//Approach:
+
+// Loop through the array finding the peaks and valleys.
+// When there is a peak, sell. When there is a valley, buy.
+// If the stock history ends on a valley, do not buy.
+
 const buySell = stockHistory => {};
 
 module.exports = buySell;
