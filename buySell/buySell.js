@@ -29,6 +29,51 @@
 // When there is a peak, sell. When there is a valley, buy.
 // If the stock history ends on a valley, do not buy.
 
-const buySell = stockHistory => {};
+const isPeak = (array, i) => {
+  const current = array[i];
+  const before = array[i - 1];
+  const after = array[i + 1];
 
-module.exports = buySell;
+  if (before <= current || before === undefined) {
+    if (after < current || after === undefined) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const isValley = (array, i) => {
+  const current = array[i];
+  const before = array[i - 1];
+  const after = array[i + 1];
+
+  if (before >= current || before === undefined) {
+    if (after > current || after === undefined) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const buySell = stockHistory => {
+  let profit = 0;
+  let ownStock = false;
+  for (let i = 0; i < stockHistory.length; i += 1) {
+    if (isPeak(stockHistory, i) && ownStock) {
+      profit += stockHistory[i];
+      ownStock = !ownStock;
+    }
+
+    if (isValley(stockHistory, i) && !ownStock) {
+      if (i != stockHistory.length - 1) {
+        profit -= stockHistory[i];
+        ownStock = !ownStock;
+      }
+    }
+  }
+  return profit;
+};
+
+module.exports = { buySell, isPeak, isValley };
