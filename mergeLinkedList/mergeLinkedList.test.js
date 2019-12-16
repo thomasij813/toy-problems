@@ -39,9 +39,9 @@ const mapLinkedList = node => {
 
 describe("mergeLinkedLists", () => {
   it("Should merge two linked lists", () => {
-    ll1 = linkTheList([5, 10, 15, 20, 25]);
-    ll2 = linkTheList([3, 6, 9, 12, 15, 18, 21]);
-    expectedOutput = [5, 3, 10, 6, 15, 9, 20, 12, 25, 15];
+    const ll1 = linkTheList([5, 10, 15, 20, 25]);
+    const ll2 = linkTheList([3, 6, 9, 12, 15, 18, 21]);
+    const expectedOutput = [5, 3, 10, 6, 15, 9, 20, 12, 25, 15];
     expect(mapLinkedList(mergeLinkedLists(ll1, ll2))).toEqual(expectedOutput);
   });
 });

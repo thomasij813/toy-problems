@@ -13,6 +13,43 @@ Output :
 Remaining List : 18 -> 21 -> null
 */
 
-const mergeLinkedLists = (list1, list2) => {};
+const printLinkedList = list => {
+  console.log(list.val);
+  if (list.next) {
+    printLinkedList(list.next);
+  }
+};
+
+const mergeLinkedLists = (list1, list2) => {
+  let start = null;
+  let tail = null;
+
+  while (list1 && list2) {
+    if (!start) {
+      start = list1;
+      tail = list2;
+      list1 = list1.next;
+      list2 = list2.next;
+      start.next = tail;
+    } else {
+      tail.next = list1;
+      tail = tail.next;
+      list1 = list1.next;
+      tail.next = list2;
+      tail = tail.next;
+      list2 = list2.next;
+    }
+  }
+
+  tail.next = null;
+
+  const remainder = list1 || list2;
+
+  if (remainder) {
+    printLinkedList(remainder);
+  }
+
+  return start;
+};
 
 module.exports = mergeLinkedLists;
