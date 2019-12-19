@@ -23,7 +23,11 @@
 
 // Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
 // Could you do it in-place with O(1) extra space?
-
-const rotateArray = array => {};
+const rotateArray = (array, k) => {
+  for (let i = 0; i < k; i++) {
+    array.unshift(array.pop());
+  }
+  return array;
+};
 
 module.exports = rotateArray;
