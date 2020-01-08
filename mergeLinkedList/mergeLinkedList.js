@@ -13,12 +13,12 @@ Output :
 Remaining List : 18 -> 21 -> null
 */
 
-const printLinkedList = list => {
-  console.log(list.val);
-  if (list.next) {
-    printLinkedList(list.next);
-  }
-};
+// const printLinkedList = list => {
+//   console.log(list.val);
+//   if (list.next) {
+//     printLinkedList(list.next);
+//   }
+// };
 
 const mergeLinkedLists = (list1, list2) => {
   let start = null;
