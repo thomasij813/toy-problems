@@ -45,9 +45,9 @@ const mergeLinkedLists = (list1, list2) => {
 
   const remainder = list1 || list2;
 
-  if (remainder) {
-    printLinkedList(remainder);
-  }
+  // if (remainder) {
+  //   printLinkedList(remainder);
+  // }
 
   return start;
 };
